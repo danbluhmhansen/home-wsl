@@ -18,6 +18,8 @@
     pkgs.fd
     pkgs.sd
     pkgs.xh
+
+    pkgs.bartib
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is through 'home.file'.
@@ -38,6 +40,9 @@
   programs.nushell = {
     enable = true;
     configFile.source = ./config.nu;
+    environmentVariables = {
+      BARTIB_FILE = "/home/danbluhmhansen/activities.bartib";
+    };
     shellAliases = {
       ll = "ls -l";
     };
