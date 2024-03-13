@@ -5,15 +5,27 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
-
-{
-  wsl.enable = true;
-  wsl.defaultUser = "danbluhmhansen";
+{ config, lib, pkgs, ... }: {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];  
 
   users.users.danbluhmhansen.isNormalUser = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];  
+  wsl.enable = true;
+  wsl.defaultUser = "danbluhmhansen";
+  wsl.usbip = {
+    enable = true;
+    autoAttach = ["1-5"];
+  };
+
+  services.pcscd.enable = true;
+  services.udev = {
+    enable = true;
+    packages = [pkgs.yubikey-personalization];
+    extraRules = ''
+      SUBSYSTEM=="usb", MODE="0666"
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", TAG+="uaccess", MODE="0666"
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

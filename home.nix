@@ -19,6 +19,13 @@
     pkgs.sd
     pkgs.xh
 
+    pkgs.openssh
+    pkgs.libfido2
+    pkgs.yubikey-manager
+    pkgs.usbutils
+
+    pkgs.ripasso-cursive
+
     pkgs.bartib
   ];
 
@@ -49,9 +56,6 @@
     extraConfig = ''
       use ${pkgs.nu_scripts}/share/nu_scripts/themes/nu-themes/catppuccin-mocha.nu
       $env.config.color_config = (catppuccin-mocha)
-
-      register ${pkgs.nushellPlugins.gstat}/bin/nu_plugin_gstat
-      register ${pkgs.nushellPlugins.net}/bin/nu_plugin_net
 
       source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/btm/btm-completions.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/custom-completions/cargo/cargo-completions.nu
@@ -100,9 +104,17 @@
 
   programs.git = {
     enable = true;
-    userEmail = "16237377+danbluhmhansen@users.noreply.github.com";
+    userEmail = "00.pavers_dither@icloud.com";
     userName = "Dan Bluhm Hansen";
-    extraConfig.init.defaultBranch = "main";
+    signing = {
+      key = "0x077BBC8A99A747DD";
+      signByDefault = true;
+    };
+    extraConfig = {
+      diff.algorithm = "histogram";
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+    };
     delta = {
       enable = true;
       options = {
@@ -126,16 +138,6 @@
       url = "https://raw.githubusercontent.com/catppuccin/gitui/ce0d073676dc96d005f7b91368e5cd565d840104/theme/mocha.ron";
       hash = "sha256-i0WUnSoi9yL+OEgn5b2w7f9bqVYzBkt9zNaysSJAYLY=";
     };
-  };
-
-  programs.zellij = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
-    settings.default_shell = "nu";
-    settings.default_layout = "dev";
-    settings.theme = "catppuccin-mocha";
   };
 
   programs.bottom.enable = true;

@@ -21,7 +21,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.danbluhmhansen.imports = [
             ./home.nix
+            ./zellij.nix
             ./helix.nix
+            ./gpg.nix
           ];
 
           # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
