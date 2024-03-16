@@ -21,10 +21,8 @@
 
     pkgs.openssh
     pkgs.libfido2
-    pkgs.yubikey-manager
-    pkgs.usbutils
 
-    pkgs.ripasso-cursive
+    pkgs.prs
 
     pkgs.bartib
   ];
