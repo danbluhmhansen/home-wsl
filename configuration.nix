@@ -17,6 +17,10 @@
     autoAttach = ["1-5"];
   };
 
+  environment.systemPackages = [
+    (import ./win32yank.nix {inherit pkgs;})
+  ];
+
   services.pcscd.enable = true;
   services.udev = {
     enable = true;
