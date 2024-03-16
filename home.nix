@@ -32,6 +32,8 @@
     ".config/zellij/layouts/dev.kdl".source = zellij/layouts/dev.kdl;
   };
 
+  services.ssh-agent.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
